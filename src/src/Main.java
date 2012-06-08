@@ -25,6 +25,7 @@ public class Main {
         
         System.out.println("Hello world! !\n");
         System.out.println("Dodane w netbeans!\n");
+        System.out.println("Push me in my netbeans!\n");
         
         Window okno = new Window();
         okno.setVisible(true);
