@@ -4,14 +4,13 @@
  */
 package src;
 
-
 import JaCoP.constraints.netflow.NetworkBuilder;
-import JaCoP.constraints.netflow.NetworkFlow;
-import JaCoP.constraints.netflow.simplex.Node;
 import JaCoP.constraints.netflow.simplex.Arc;
+import JaCoP.constraints.netflow.simplex.Node;
 import JaCoP.core.IntVar;
 import JaCoP.core.Store;
 
+//dupadupa!
 
 
 
@@ -58,7 +57,7 @@ public class AntsCriticalPath {
        //net.setCostVariable (cost);
         
  
-      store.impose( NetworkFlow const = new NetworkFlow(net));
+      //store.impose( NetworkFlow const = new NetworkFlow(net));
   
     //hey
     
