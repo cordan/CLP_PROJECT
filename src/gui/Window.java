@@ -162,6 +162,7 @@ public class Window extends javax.swing.JFrame {
             jPanel4.add(done);
         }
         jPanel1.repaint();
+        //dupadupadupa! ROBERRRTOOO!
     }//GEN-LAST:event_jSlider1StateChanged
 
     /**
