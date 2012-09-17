@@ -7,7 +7,11 @@ import JaCoP.constraints.netflow.simplex.Node;
 import JaCoP.constraints.netflow.simplex.NetworkSimplex;
 import JaCoP.core.IntVar;
 import JaCoP.core.Store;
+import JaCoP.core.Var;
 import java.util.List;
+import java.util.ArrayList;
+import JaCoP.search.*;
+
 
 
 

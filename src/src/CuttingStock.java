@@ -91,7 +91,7 @@ public class CuttingStock {
     
     }
     
-    
+    /*
     //copied from example not really working
     public void searchSpecific() {
 
@@ -123,5 +123,5 @@ public class CuttingStock {
                 System.out.println("Roll_" + i + ": " + startPos[i].value() + ".." + endPos[i].value() + "\n");
             }                                          
         }
-    }
+    }*/
 }

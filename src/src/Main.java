@@ -22,14 +22,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        /*
         System.out.println("Hello world! !\n");
         System.out.println("Dodane w netbeans!\n");
         System.out.println("Push me in my netbeans!\n");
-        
+        */
         Window okno = new Window();
         okno.setVisible(true);
-        
+        /*
         CuttingStock cutme = new CuttingStock();
         int pieces[] = {2,1};
         int res[]    = {1,1};
@@ -37,13 +37,14 @@ public class Main {
         cutme.model(3, pieces,res);
         
         cutme.searchSpecific();
-        
+        */
         AntCP eatme = new AntCP();
         
-        int[] weights = {5,7,15,4,6,7,9,3,9,8};
+        int[] weights = {5,5,7,7,15,15,4,4,6,6,7,7,9,9,3,3,9,9,8,8};
+        //int[] weights = {1,1,3,3,10,10,6,6,7,7,10,10,5,5,6,6,8,8,9,9};
         
-        eatme.Network_definition(weights);
-        eatme.searchSpecific();
+        eatme.Network_definition(weights,0,5);
+       
         
     }
 }

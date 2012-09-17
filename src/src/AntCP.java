@@ -23,132 +23,142 @@ import JaCoP.search.*;
  */
 public class AntCP {
     
-    public ArrayList<Var> vars;
-    public IntVar cost;
-    Store store = new Store();
     
-    NetworkBuilder net = new NetworkBuilder();
+    private String result = "";
+    private String cost_vl = "";
+    public Store store = new Store();
+    public int num_arcs = 20;                       // this should be displayed in the GUI
     
-    int num_arcs = 10;                       // this should be displayed in the GUI
-    
-    IntVar [] x = new IntVar[num_arcs];             // 10 is the number of paths
-    
-    public void Network_definition(int [] weights) {
+    public void Network_definition(int [] weights,int start_node,int end_node) {
+        Search<IntVar> search = null;
+        SelectChoicePoint<IntVar> select = null;
+        NetworkBuilder net = new NetworkBuilder();
         
-        System.out.println("Ant Critical Path:\n");
-        List<Node> list_nodes = new ArrayList<>();
-        List<Arc> list_arcs = new ArrayList<>();
+        System.out.println("Critical Path:\n");
+        
+        Node[] nodes = new Node[6];
+        Arc[] arcs = new Arc[num_arcs + 2];
+        
 
-        x[0] = new IntVar(store,"source->A",0,15);
-        x[1] = new IntVar(store,"source->B",0,15);
-        x[2] = new IntVar(store,"source->C",0,15);
-        x[3] = new IntVar(store,"A->B",0,15);
-        x[4] = new IntVar(store,"A->C",0,15);
-        x[5] = new IntVar(store,"A->D",0,15);
-        x[6] = new IntVar(store,"B->D",0,15);
-        x[7] = new IntVar(store,"C->D",0,15);
-        x[8] = new IntVar(store,"C->sink",0,15);
-        x[9] = new IntVar(store,"D->sink",0,15);
+        nodes[0] = net.addNode("0", 0); 
+        nodes[1] = net.addNode("1", 0); 
+        nodes[2] = net.addNode("2", 0); 
+        nodes[3] = net.addNode("3", 0); 
+        nodes[4] = net.addNode("4", 0); 
+        nodes[5] = net.addNode("5", 0); 
         
-        x[0] = new IntVar(store,"source->A");
-        x[1] = new IntVar(store,"source->B");
-        x[2] = new IntVar(store,"source->C");
-        x[3] = new IntVar(store,"A->B");
-        x[4] = new IntVar(store,"A->C");
-        x[5] = new IntVar(store,"A->D");
-        x[6] = new IntVar(store,"B->D");
-        x[7] = new IntVar(store,"C->D");
-        x[8] = new IntVar(store,"C->sink");
-        x[9] = new IntVar(store,"D->sink");
+        Node source = net.addNode("source",1);
+        Node sink = net.addNode("sink",-1);
+        
+        IntVar [] x = new IntVar[num_arcs + 2];
+        int lower = 0, upper = 5;    //  5 just to put a number, i don't know the meaning
+        
+        x[0] = new IntVar(store,"source->"+start_node,lower,upper);
+        x[1] = new IntVar(store,"0->1",lower,upper);
+        x[2] = new IntVar(store,"1->0",lower,upper);
+        x[3] = new IntVar(store,"0->2",lower,upper);
+        x[4] = new IntVar(store,"2->0",lower,upper);
+        x[5] = new IntVar(store,"0->3",lower,upper);
+        x[6] = new IntVar(store,"3->0",lower,upper);
+        x[7] = new IntVar(store,"1->2",lower,upper);
+        x[8] = new IntVar(store,"2->1",lower,upper);
+        x[9] = new IntVar(store,"1->3",lower,upper);
+        x[10] = new IntVar(store,"3->1",lower,upper);
+        x[11] = new IntVar(store,"1->4",lower,upper);
+        x[12] = new IntVar(store,"4->1",lower,upper);
+        x[13] = new IntVar(store,"2->4",lower,upper);
+        x[14] = new IntVar(store,"4->2",lower,upper);
+        x[15] = new IntVar(store,"3->4",lower,upper);
+        x[16] = new IntVar(store,"4->3",lower,upper);
+        x[17] = new IntVar(store,"3->5",lower,upper);
+        x[18] = new IntVar(store,"5->3",lower,upper);
+        x[19] = new IntVar(store,"4->5",lower,upper);
+        x[20] = new IntVar(store,"5->4",lower,upper);
+        x[21] = new IntVar(store,"sink->"+end_node,lower,upper);
+        
+        /* adding connection between nodes(arcs) */
+
+        arcs[0] = net.addArc(source, nodes[start_node],0,x[0]);
+        arcs[1] = net.addArc(nodes[0],nodes[1], weights[0],x[1]);
+        arcs[2] = net.addArc(nodes[1],nodes[0], weights[1],x[2]);
+        arcs[3] = net.addArc(nodes[0], nodes[2], weights[2],x[3]); 
+        arcs[4] = net.addArc(nodes[2],nodes[0], weights[3],x[4]);
+        arcs[5] = net.addArc(nodes[0],nodes[3], weights[4],x[5]); 
+        arcs[6] = net.addArc(nodes[3],nodes[0], weights[5],x[6]);
+        arcs[7] = net.addArc(nodes[1],nodes[2], weights[6],x[7]); 
+        arcs[8] = net.addArc(nodes[2],nodes[1], weights[7],x[8]);
+        arcs[9] = net.addArc(nodes[1],nodes[3], weights[8],x[9]);
+        arcs[10] = net.addArc(nodes[3], nodes[1], weights[9],x[10]);
+        arcs[11] = net.addArc(nodes[1],nodes[4], weights[10],x[11]);
+        arcs[12] = net.addArc(nodes[4],nodes[1], weights[11],x[12]);
+        arcs[13] = net.addArc(nodes[2], nodes[4], weights[12],x[13]); 
+        arcs[14] = net.addArc(nodes[4],nodes[2], weights[13],x[14]);
+        arcs[15] = net.addArc(nodes[3],nodes[4], weights[14],x[15]); 
+        arcs[16] = net.addArc(nodes[4],nodes[3], weights[15],x[16]);
+        arcs[17] = net.addArc(nodes[3],nodes[5], weights[16],x[17]); 
+        arcs[18] = net.addArc(nodes[5],nodes[3], weights[17],x[18]);
+        arcs[19] = net.addArc(nodes[4],nodes[5], weights[18],x[19]);
+        arcs[20] = net.addArc(nodes[5],nodes[4], weights[19],x[20]); 
+        arcs[21] = net.addArc(nodes[end_node],sink, 0,x[21]);
         
         
-        list_nodes.add(0,net.addNode("source",5)); 
-        list_nodes.add(1,net.addNode("A", 0));  
-        list_nodes.add(2,net.addNode("B", 0)); 
-        list_nodes.add(3,net.addNode("C", 0));  
-        list_nodes.add(4,net.addNode("D", 0)); 
-        list_nodes.add(5,net.addNode("sink", -5)); 
-        
-       
-        list_arcs.add(0,net.addArc(list_nodes.get(0), list_nodes.get(1), weights[0],x[0]));
-        list_arcs.add(1,net.addArc(list_nodes.get(0),list_nodes.get(2), weights[1],x[1]));
-        list_arcs.add(2,net.addArc(list_nodes.get(0),list_nodes.get(3), weights[2],x[2]));
-        list_arcs.add(3,net.addArc(list_nodes.get(1), list_nodes.get(2), weights[3],x[3])); 
-        list_arcs.add(4,net.addArc(list_nodes.get(1),list_nodes.get(3), weights[4],x[4]));
-        list_arcs.add(5,net.addArc(list_nodes.get(1),list_nodes.get(4), weights[5],x[5])); 
-        list_arcs.add(6,net.addArc(list_nodes.get(2),list_nodes.get(4), weights[6],x[6]));
-        list_arcs.add(7,net.addArc(list_nodes.get(3),list_nodes.get(4), weights[7],x[7])); 
-        list_arcs.add(8,net.addArc(list_nodes.get(3),list_nodes.get(5), weights[8],x[8]));
-        list_arcs.add(9,net.addArc(list_nodes.get(4),list_nodes.get(5), weights[9],x[9]));
-        
-        
-        /*
-        list_arcs.add(0,net.addArc(list_nodes.get(0), list_nodes.get(1), weights[0]));
-        list_arcs.add(1,net.addArc(list_nodes.get(0),list_nodes.get(2), weights[1]));
-        list_arcs.add(2,net.addArc(list_nodes.get(0),list_nodes.get(3), weights[2]));
-        list_arcs.add(3,net.addArc(list_nodes.get(1), list_nodes.get(2), weights[3])); 
-        list_arcs.add(4,net.addArc(list_nodes.get(1),list_nodes.get(3), weights[4]));
-        list_arcs.add(5,net.addArc(list_nodes.get(1),list_nodes.get(4), weights[5])); 
-        list_arcs.add(6,net.addArc(list_nodes.get(2),list_nodes.get(4), weights[6]));
-        list_arcs.add(7,net.addArc(list_nodes.get(3),list_nodes.get(4), weights[7])); 
-        list_arcs.add(8,net.addArc(list_nodes.get(3),list_nodes.get(5), weights[8]));
-        list_arcs.add(9,net.addArc(list_nodes.get(4),list_nodes.get(5), weights[9]));
-        */
-        
-        cost = new IntVar(store, "cost", 0, 100);
+        IntVar cost = new IntVar(store, "cost", 0, 1000);
         net.setCostVariable(cost);
+        net.build();
         
-        NetworkFlow net_flow = new NetworkFlow(net);
+        store.impose(new NetworkFlow(net));                          // impose the Constraints of the Network to the store
+     
+        search = new DepthFirstSearch<>();
+        select = new InputOrderSelect<>(store, x, new IndomainMedian<>());
         
-        net_flow.impose(store);                         // impose the Constraints of the Network to the store
-        
-        
-       /* NetworkSimplex result = new NetworkSimplex(list_nodes, list_arcs);
-        result.print();
-    
-        Search<IntVar> label = new DepthFirstSearch<>();
-        
-        SelectChoicePoint<IntVar> select = new InputOrderSelect<IntVar>(store,x,new IndomainMin<IntVar>())                                                              x,)
-               
-        */
-        
-        
-        
-    }
-    
-    
-    
-    public void searchSpecific() {
+        boolean result_search = search.labeling(store, select, cost);
 
-        SelectChoicePoint select = new SimpleSelect (vars.toArray(new Var[1]),
-                                                     new SmallestDomain(),
-                                                     new IndomainMin ());
-        
-        Search label = new DepthFirstSearch ();
-        label.getSolutionListener().searchAll(true);
-        label.getSolutionListener().recordSolutions(true);
+        if(result_search){ 
+            cost_vl += search.getCostValue();
 
-        boolean result;
-        
-        // minimize over numMasterRolls
-        result = label.labeling(store, select, cost); 
+                int counter = 0;
+                for(int i = 0; i < x.length; i++){
+                    if(x[i].value() == 1){
+                        if(i == 0 || i == 21){ counter++; }
+                        else{   
+                            System.out.println("Arc[" + i + "] => " + arcs[i].name());
+                            counter++;
+                        }
+                    }
+            }
+            // path in order
+            int cnt = 0;
+            int index = 0;
+            result += arcs[0].head.name + "->"; // start node
 
-        Var[] variables = label.getSolutionListener().getVariables();
-        for(int i = 0; i < variables.length; i++) {
-            System.out.println("Variable " + i + " " + variables[i]);
-        }
+            while(cnt < counter-2){
+                for(int i = 0; i < x.length; i++){
+                    if(arcs[i].name().substring(0, arcs[i].name().indexOf("-")).contains(arcs[index].head.name) && x[i].value() == 1){
+                        index = i;   
+                        break;
+                    }     
+                }
+                result += arcs[index].head.name + "->";
+                cnt++; 
+            }
 
-        if(result) {
+            result = result.substring(0, result.length()-2);
+            System.out.println(result);
             
-            label.printAllSolutions();
-
-            System.out.println("\nNumber of rolls needed: " + cost.value());
-            
-            /*for(int i = 0; i < rollsNumAll; i++) {
-                System.out.println("Roll_" + i + ": " + startPos[i].value() + ".." + endPos[i].value() + "\n");
-            }     */                                     
         }
-    }
-    
-    
+        else System.out.println("No solution was found");
+
 }
+
+    public String get_cost_vl(){
+        return cost_vl;
+    }
+
+    public String get_result(){
+        return result;
+    }
+
+
+}
+
+
