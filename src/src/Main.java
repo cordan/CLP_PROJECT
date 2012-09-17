@@ -43,6 +43,7 @@ public class Main {
         int[] weights = {5,7,15,4,6,7,9,3,9,8};
         
         eatme.Network_definition(weights);
+        eatme.searchSpecific();
         
     }
 }
