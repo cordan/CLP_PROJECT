@@ -9,12 +9,10 @@ import JaCoP.constraints.netflow.NetworkBuilder;
 import JaCoP.constraints.netflow.NetworkFlow;
 import JaCoP.constraints.netflow.simplex.Arc;
 import JaCoP.constraints.netflow.simplex.Node;
-import JaCoP.constraints.netflow.simplex.NetworkSimplex;
+
 import JaCoP.core.IntVar;
 import JaCoP.core.Store;
-import JaCoP.core.Var;
-import java.util.List;
-import java.util.ArrayList;
+
 import JaCoP.search.*;
 
 /**
@@ -51,7 +49,7 @@ public class AntCP {
         Node sink = net.addNode("sink",-1);
         
         IntVar [] x = new IntVar[num_arcs + 2];
-        int lower = 0, upper = 5;    //  5 just to put a number, i don't know the meaning
+        int lower = 0, upper = 1;    //  if the arc is taken it will have '1' if not '0'
         
         x[0] = new IntVar(store,"source->"+start_node,lower,upper);
         x[1] = new IntVar(store,"0->1",lower,upper);
@@ -119,17 +117,18 @@ public class AntCP {
                 int counter = 0;
                 for(int i = 0; i < x.length; i++){
                     if(x[i].value() == 1){
-                        if(i == 0 || i == 21){ counter++; }
+                        if(i == 0 || i == 21){ counter++; }                 //omitiendo imprimir el source y sink
                         else{   
-                            System.out.println("Arc[" + i + "] => " + arcs[i].name());
+                            System.out.println("Arc[" + i + "] => " + arcs[i].name()+" => cost: "+weights[i-1]);
                             counter++;
                         }
                     }
             }
+            System.out.println("\nTOTAL COST: "+cost_vl);
             // path in order
             int cnt = 0;
             int index = 0;
-            result += arcs[0].head.name + "->"; // start node
+            result += arcs[0].head.name + "->";                             // start node
 
             while(cnt < counter-2){
                 for(int i = 0; i < x.length; i++){
@@ -143,7 +142,7 @@ public class AntCP {
             }
 
             result = result.substring(0, result.length()-2);
-            System.out.println(result);
+            System.out.println("PATH: "+result);
             
         }
         else System.out.println("No solution was found");
