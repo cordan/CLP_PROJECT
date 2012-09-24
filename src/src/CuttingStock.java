@@ -20,58 +20,86 @@ import java.util.Arrays;
  */
 public class CuttingStock {
     
-    public ArrayList<Var> vars;
-    public IntVar cost;
+    public ArrayList<Var>   vars;
+    public IntVar           cost;
         
-    IntVar[] startPos;
-    IntVar [] endPos;
-    int rollsNumAll;
-    Store store;
+    IntVar[]    startPos;
+    IntVar []   endPos;
+    int         rlsDistNum;
+    int         rlsNumAll;
+    Store       store;
+    int []      m_rlsSizes;
+    int []      m_rlsAmount;
     
-    public void model(int Max_size, int [] rlsSizes, int [] rsrcs) {
+    /**
+     * Models a CLP problem
+     * 
+     * @param Max_size Maximum size of master roll
+     * @param rlsSizes Sizes of distinct rolls
+     * @param rlsAmount Amount of dinstinct rolls
+     */
+    public void model(int Max_size, int [] rlsSizes, int [] rlsAmount) {
         
+        m_rlsSizes = rlsSizes;
+        m_rlsAmount = rlsAmount;
         int M_size = Max_size;  
-        int INF = 100000;
-        int rlsNum = rlsSizes.length;
-    
-        rollsNumAll = rlsNum;
+        int INF = 1000;
+        rlsDistNum = rlsSizes.length;
+        int [][]rollsData = new int[rlsDistNum][2];
+        rlsNumAll = 0;
+        int ind; // base index number for moving through tables
+        
+        for(int i = ind = 0; i < rlsDistNum; i++)
+        {
+            rollsData[i][0] = rlsSizes[i];
+            rollsData[i][1] = rlsAmount[i];
+            rlsNumAll += rlsAmount[i];
+        }
         store = new Store();
         
-        IntVar numMasterRolls   = new IntVar(store, "numMasterRolls", 2, INF); // will be minimized
-        IntVar maxSize    = new IntVar(store, "maxSize", M_size,M_size);
-    
-        //Start positions
-        startPos       = new IntVar[rollsNumAll];
+//        Create a beginning set of huge amount of master rolls
+//        This variable will be minimized
+        IntVar numMasterRolls   = new IntVar(store, "numMasterRolls", 1, INF);
         
-        for(int i = 0; i < rollsNumAll; i++) {
-            startPos[i] = new IntVar(store, "startPos_"+i, 0, M_size); 
+//        Last possible ending position of roll
+        IntVar maxPos    = new IntVar(store, "maxSize", M_size,M_size);
+    
+//        Starting positions
+        startPos       = new IntVar[rlsNumAll];
+        
+        for(int i = 0; i < rlsDistNum; i++) {
+            for( int j = 0; j < rlsAmount[i]; j++){
+                startPos[ind+j] = new IntVar(store, "startPos_"+(char)(i+'A')+j, 0, M_size);
+                System.out.println("Roll_" + (char)(i+'A')+j + ".size() = "
+                        + rlsSizes[i] );
+            }
+            ind += rlsAmount[i];
         }
         
-        //IntVar sumStartPos = new IntVar(store, "SumStartPos", 0, 1000);
-
-        //store.impose(new Sum(startPos, sumStartPos));
         
+        IntVar[] lengths        = new IntVar[rlsNumAll]; //lengths of each roll
+        IntVar[] resources      = new IntVar[rlsNumAll]; //always using only 1 Master roll
+        endPos                  = new IntVar[rlsNumAll]; //ending position of roll
         
-        IntVar[] lengths        = new IntVar[rollsNumAll]; //lengths of each roll
-        IntVar[] resources      = new IntVar[rollsNumAll]; //always using only 1 Master roll
-        endPos                  = new IntVar[rollsNumAll]; //ending position of roll
-        
-        for (int i = 0; i < rlsNum; i++) {
-			// converts to FDV
-			lengths[i] = new IntVar(store, "length_"+i, rlsSizes[i], rlsSizes[i]);
-			// converts to FDV
-			resources[i] = new IntVar(store, "res_"+i, rsrcs[i],rsrcs[i]);
-
+        for (int i = ind = 0; i < rlsDistNum; i++) {            
+            for( int j = 0; j < rlsAmount[i]; j++){
+                
+//		 Converts to FDV
+		lengths[ind+j] = new IntVar(store, "length_"+(char)(i+'A')+j, rlsSizes[i], rlsSizes[i]);
+                System.out.println(lengths[ind+j]);
+                resources[ind+j] = new IntVar(store, "res_"+(char)(i+'A')+j, rlsAmount[i],rlsAmount[i]);
 			
-			endPos[i]  = new IntVar(store, "end_"+i, 0, M_size);
-			store.impose(new XplusYeqZ(startPos[i], lengths[i], endPos[i]));
-			store.impose(new XlteqY(endPos[i], maxSize));
-			
+//               Setting constrains
+		endPos[ind+j]  = new IntVar(store, "end_"+(char)(i+'A')+j, 0, M_size);
+		store.impose(new XplusYeqZ(startPos[ind+j], lengths[ind+j], endPos[ind+j]));
+		store.impose(new XlteqY(endPos[ind+j], maxPos));
+            }
+            ind += rlsAmount[i];
         }
         
         store.impose(new Cumulative(startPos, lengths, resources, numMasterRolls));
         
-        System.out.println("In Cutting stock:\n");
+//        System.out.println("In Cutting stock:\n");
         
         vars = new ArrayList<Var>();
         
@@ -85,16 +113,16 @@ public class CuttingStock {
             // exit(1);
         }
         
-	    vars.add(numMasterRolls);     
+	vars.add(numMasterRolls);     
 	    
-	    cost = numMasterRolls;
-    
+        cost = numMasterRolls;
     }
     
     
     //copied from example not really working
     public void searchSpecific() {
 
+        int ind = 0;
         SelectChoicePoint select = new SimpleSelect (vars.toArray(new Var[1]),
                                                      new SmallestDomain(),
                                                      new IndomainMin ());
@@ -105,23 +133,25 @@ public class CuttingStock {
 
         boolean result;
         
-        // minimize over numMasterRolls
+//        minimize over cost = numMasterRolls
         result = label.labeling(store, select, cost); 
 
         Var[] variables = label.getSolutionListener().getVariables();
-        for(int i = 0; i < variables.length; i++) {
-            System.out.println("Variable " + i + " " + variables[i]);
-        }
+//        for(int i = 0; i < variables.length; i++) {
+//            System.out.println("Variable " + i + " " + variables[i]);
+//        }
 
         if(result) {
-            
             label.printAllSolutions();
 
-            System.out.println("\nNumber of rolls needed: " + cost.value());
+            System.out.println("Number of master rolls needed: " + cost.value());
             
-            for(int i = 0; i < rollsNumAll; i++) {
-                System.out.println("Roll_" + i + ": " + startPos[i].value() + ".." + endPos[i].value() + "\n");
-            }                                          
+            for(int i = ind = 0; i < rlsDistNum; i++) {
+                for( int j = 0; j < m_rlsAmount[i]; j++){
+                    System.out.println("Roll_" + (char)(i+'A')+j + ": " + startPos[i].value() + ".." + endPos[i].value());
+                }
+                ind += m_rlsAmount[i];
+            }
         }
     }
 }
