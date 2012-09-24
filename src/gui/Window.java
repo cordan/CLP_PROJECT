@@ -554,7 +554,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void SubmitArcDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitArcDataActionPerformed
-        int[] weights = null;
+        /*int[] weights = null;
         weights[0] = Integer.parseInt(arc1.getText());
         weights[1] = Integer.parseInt(arc2.getText());
         weights[2] = Integer.parseInt(arc3.getText());
@@ -575,9 +575,10 @@ public class Window extends javax.swing.JFrame {
         weights[17] = Integer.parseInt(arc18.getText());
         weights[18] = Integer.parseInt(arc19.getText());
         weights[19] = Integer.parseInt(arc20.getText());
-        
+        */
+        int[] weights = {1,1,3,3,10,10,6,6,7,7,10,10,5,5,6,6,8,8,9,9};
         AntCP Ants = new AntCP();
-        Ants.Network_definition(weights, 0, 1);
+        Ants.Network_definition(weights, Integer.parseInt((String)startNode.getSelectedItem()), Integer.parseInt((String)finishNode.getSelectedItem()));
         
         ArcResultsDisplay.setVisible(true);
         ArcResultsDisplay.setText(Ants.get_result());
