@@ -7,6 +7,7 @@ package gui;
 import gui.CuttingStockInput;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import src.AntCP;
 
 /**
@@ -41,49 +42,49 @@ public class Window extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        AntGraph = new javax.swing.JLabel();
-        label1 = new javax.swing.JLabel();
         arc1 = new javax.swing.JTextField();
         arc2 = new javax.swing.JTextField();
-        label2 = new javax.swing.JLabel();
-        label3 = new javax.swing.JLabel();
         arc3 = new javax.swing.JTextField();
-        label4 = new javax.swing.JLabel();
         arc4 = new javax.swing.JTextField();
-        label5 = new javax.swing.JLabel();
         arc5 = new javax.swing.JTextField();
-        label6 = new javax.swing.JLabel();
         arc6 = new javax.swing.JTextField();
         arc7 = new javax.swing.JTextField();
-        label7 = new javax.swing.JLabel();
-        label8 = new javax.swing.JLabel();
         arc8 = new javax.swing.JTextField();
         arc9 = new javax.swing.JTextField();
+        arc10 = new javax.swing.JTextField();
+        arc11 = new javax.swing.JTextField();
+        arc12 = new javax.swing.JTextField();
+        arc13 = new javax.swing.JTextField();
+        arc14 = new javax.swing.JTextField();
+        arc15 = new javax.swing.JTextField();
+        arc16 = new javax.swing.JTextField();
+        arc17 = new javax.swing.JTextField();
+        arc18 = new javax.swing.JTextField();
+        arc19 = new javax.swing.JTextField();
+        arc20 = new javax.swing.JTextField();
+        label4 = new javax.swing.JLabel();
+        label1 = new javax.swing.JLabel();
+        label5 = new javax.swing.JLabel();
+        label6 = new javax.swing.JLabel();
+        label7 = new javax.swing.JLabel();
+        label3 = new javax.swing.JLabel();
+        label8 = new javax.swing.JLabel();
+        label2 = new javax.swing.JLabel();
+        AntGraph = new javax.swing.JLabel();
         label9 = new javax.swing.JLabel();
         label10 = new javax.swing.JLabel();
-        arc10 = new javax.swing.JTextField();
         SubmitArcData = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         ArcResultsDisplay = new javax.swing.JTextPane();
-        arc11 = new javax.swing.JTextField();
         label11 = new javax.swing.JLabel();
         label12 = new javax.swing.JLabel();
-        arc12 = new javax.swing.JTextField();
-        arc13 = new javax.swing.JTextField();
         label13 = new javax.swing.JLabel();
-        arc14 = new javax.swing.JTextField();
         label14 = new javax.swing.JLabel();
-        arc15 = new javax.swing.JTextField();
         label15 = new javax.swing.JLabel();
-        arc16 = new javax.swing.JTextField();
         label16 = new javax.swing.JLabel();
         label17 = new javax.swing.JLabel();
-        arc17 = new javax.swing.JTextField();
-        arc18 = new javax.swing.JTextField();
         label18 = new javax.swing.JLabel();
         label19 = new javax.swing.JLabel();
-        arc19 = new javax.swing.JTextField();
-        arc20 = new javax.swing.JTextField();
         label20 = new javax.swing.JLabel();
         label21 = new javax.swing.JLabel();
         startNode = new javax.swing.JComboBox();
@@ -150,53 +151,73 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Cutting stock", jPanel2);
 
-        AntGraph.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ants-graph.jpg"))); // NOI18N
-
-        label1.setText("0 -> 1");
-
         arc1.setName("");
 
         arc2.setName("");
 
-        label2.setText("1 -> 0");
-
-        label3.setText("0 -> 2");
-
         arc3.setName("");
-
-        label4.setText("2 -> 0");
 
         arc4.setName("");
 
-        label5.setText("0 -> 3");
-
         arc5.setName("");
-
-        label6.setText("3 -> 0");
 
         arc6.setName("");
 
         arc7.setName("");
 
-        label7.setText("1 -> 2");
-
-        label8.setText("2 -> 1");
-
         arc8.setName("");
 
         arc9.setName("");
 
+        arc10.setName("");
+
+        arc11.setName("");
+
+        arc12.setName("");
+
+        arc13.setName("");
+
+        arc14.setName("");
+
+        arc15.setName("");
+
+        arc16.setName("");
+
+        arc17.setName("");
+
+        arc18.setName("");
+
+        arc19.setName("");
+
+        arc20.setName("");
+
+        label4.setText("2 -> 0");
+
+        label1.setText("0 -> 1");
+
+        label5.setText("0 -> 3");
+
+        label6.setText("3 -> 0");
+
+        label7.setText("1 -> 2");
+
+        label3.setText("0 -> 2");
+
+        label8.setText("2 -> 1");
+
+        label2.setText("1 -> 0");
+
+        AntGraph.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ants-graph.jpg"))); // NOI18N
+
         label9.setText("1 -> 3");
 
         label10.setText("3 -> 1");
-
-        arc10.setName("");
 
         SubmitArcData.setText("OK");
         SubmitArcData.addActionListener(new java.awt.event.ActionListener() {
@@ -212,43 +233,23 @@ public class Window extends javax.swing.JFrame {
         ArcResultsDisplay.setRequestFocusEnabled(false);
         jScrollPane2.setViewportView(ArcResultsDisplay);
 
-        arc11.setName("");
-
         label11.setText("1 -> 4");
 
         label12.setText("4 -> 1");
 
-        arc12.setName("");
-
-        arc13.setName("");
-
         label13.setText("2 -> 4");
-
-        arc14.setName("");
 
         label14.setText("4 -> 2");
 
-        arc15.setName("");
-
         label15.setText("3 -> 4");
-
-        arc16.setName("");
 
         label16.setText("4 -> 3");
 
         label17.setText("3 -> 5");
 
-        arc17.setName("");
-
-        arc18.setName("");
-
         label18.setText("5 -> 3");
 
         label19.setText("4 -> 5");
-
-        arc19.setName("");
-
-        arc20.setName("");
 
         label20.setText("5 -> 4");
 
@@ -493,6 +494,8 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
+        arc1.getAccessibleContext().setAccessibleDescription("");
+
         jTabbedPane1.addTab("Shortest path", jPanel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -554,7 +557,12 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void SubmitArcDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitArcDataActionPerformed
-        /*int[] weights = null;
+        
+        
+        int[] weights;
+        
+        weights = new int[20];
+        
         weights[0] = Integer.parseInt(arc1.getText());
         weights[1] = Integer.parseInt(arc2.getText());
         weights[2] = Integer.parseInt(arc3.getText());
@@ -575,8 +583,8 @@ public class Window extends javax.swing.JFrame {
         weights[17] = Integer.parseInt(arc18.getText());
         weights[18] = Integer.parseInt(arc19.getText());
         weights[19] = Integer.parseInt(arc20.getText());
-        */
-        int[] weights = {1,1,3,3,10,10,6,6,7,7,10,10,5,5,6,6,8,8,9,9};
+        
+       
         AntCP Ants = new AntCP();
         Ants.Network_definition(weights, Integer.parseInt((String)startNode.getSelectedItem()), Integer.parseInt((String)finishNode.getSelectedItem()));
         

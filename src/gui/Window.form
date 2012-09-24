@@ -449,36 +449,17 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="AntGraph">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/gui/ants-graph.jpg"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="label1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="0 -&gt; 1"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JTextField" name="arc1">
                   <Properties>
                     <Property name="name" type="java.lang.String" value=""/>
                   </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+                  </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="arc2">
                   <Properties>
                     <Property name="name" type="java.lang.String" value=""/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="label2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="1 -&gt; 0"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="label3">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="0 -&gt; 2"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="arc3">
@@ -486,29 +467,14 @@
                     <Property name="name" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="label4">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="2 -&gt; 0"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JTextField" name="arc4">
                   <Properties>
                     <Property name="name" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="label5">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="0 -&gt; 3"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JTextField" name="arc5">
                   <Properties>
                     <Property name="name" type="java.lang.String" value=""/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="label6">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="3 -&gt; 0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="arc6">
@@ -521,16 +487,6 @@
                     <Property name="name" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="label7">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="1 -&gt; 2"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="label8">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="2 -&gt; 1"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JTextField" name="arc8">
                   <Properties>
                     <Property name="name" type="java.lang.String" value=""/>
@@ -541,6 +497,108 @@
                     <Property name="name" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JTextField" name="arc10">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="arc11">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="arc12">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="arc13">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="arc14">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="arc15">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="arc16">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="arc17">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="arc18">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="arc19">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="arc20">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="label4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="2 -&gt; 0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="label1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="0 -&gt; 1"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="label5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="0 -&gt; 3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="label6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="3 -&gt; 0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="label7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="1 -&gt; 2"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="label3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="0 -&gt; 2"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="label8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="2 -&gt; 1"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="label2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="1 -&gt; 0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="AntGraph">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/gui/ants-graph.jpg"/>
+                    </Property>
+                  </Properties>
+                </Component>
                 <Component class="javax.swing.JLabel" name="label9">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="1 -&gt; 3"/>
@@ -549,11 +607,6 @@
                 <Component class="javax.swing.JLabel" name="label10">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="3 -&gt; 1"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="arc10">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="SubmitArcData">
@@ -584,11 +637,6 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JTextField" name="arc11">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value=""/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="label11">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="1 -&gt; 4"/>
@@ -599,24 +647,9 @@
                     <Property name="text" type="java.lang.String" value="4 -&gt; 1"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="arc12">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value=""/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="arc13">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value=""/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="label13">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="2 -&gt; 4"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="arc14">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="label14">
@@ -624,19 +657,9 @@
                     <Property name="text" type="java.lang.String" value="4 -&gt; 2"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="arc15">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value=""/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="label15">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="3 -&gt; 4"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="arc16">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="label16">
@@ -649,16 +672,6 @@
                     <Property name="text" type="java.lang.String" value="3 -&gt; 5"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="arc17">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value=""/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="arc18">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value=""/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="label18">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="5 -&gt; 3"/>
@@ -667,16 +680,6 @@
                 <Component class="javax.swing.JLabel" name="label19">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="4 -&gt; 5"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="arc19">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value=""/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="arc20">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="label20">
