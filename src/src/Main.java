@@ -27,10 +27,10 @@ public class Main {
 //        okno.setVisible(true);
         
         CuttingStock cutme = new CuttingStock();
-        int pieces[] = {2,1};
-        int res[]    = {1,2};
+        int pieces[] = {3,2,1}; // 3 types of pieces of length 3, 2, 1
+        int res[]    = {1,2,3}; // 1 piece of length 3, 2 pieces of length 2, 3 pieces of length 1
         
-        cutme.model(3, pieces,res);
+        cutme.model(10, pieces,res); //size of master roll: 10
         
         cutme.searchSpecific();
         

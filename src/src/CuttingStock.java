@@ -23,14 +23,15 @@ public class CuttingStock {
     public ArrayList<Var>   vars;
     public IntVar           cost;
         
-    IntVar[]    startPos;
-    IntVar []   endPos;
-    int         rlsDistNum;
-    int         rlsNumAll;
+    IntVar[]    startPos; //Data with starting positions
+    IntVar []   endPos; //Data with ending positions of roll
+    int         rlsDistNum; //number of distinct types of rolls (different sizes)
+    int         rlsNumAll; // number of all rolls
     Store       store;
-    int []      m_rlsSizes;
-    int []      m_rlsAmount;
-    
+    int []      m_rlsSizes; //sizes of distincts rolls
+    int []      m_rlsAmount; //amount of distinct rolls
+    boolean     m_solFound; //found solution?
+    int [][]    m_orderedRolls;
     /**
      * Models a CLP problem
      * 
@@ -40,6 +41,7 @@ public class CuttingStock {
      */
     public void model(int Max_size, int [] rlsSizes, int [] rlsAmount) {
         
+        m_solFound = false;
         m_rlsSizes = rlsSizes;
         m_rlsAmount = rlsAmount;
         int M_size = Max_size;  
@@ -70,8 +72,6 @@ public class CuttingStock {
         for(int i = 0; i < rlsDistNum; i++) {
             for( int j = 0; j < rlsAmount[i]; j++){
                 startPos[ind+j] = new IntVar(store, "startPos_"+(char)(i+'A')+j, 0, M_size);
-                System.out.println("Roll_" + (char)(i+'A')+j + ".size() = "
-                        + rlsSizes[i] );
             }
             ind += rlsAmount[i];
         }
@@ -86,8 +86,8 @@ public class CuttingStock {
                 
 //		 Converts to FDV
 		lengths[ind+j] = new IntVar(store, "length_"+(char)(i+'A')+j, rlsSizes[i], rlsSizes[i]);
-                System.out.println(lengths[ind+j]);
-                resources[ind+j] = new IntVar(store, "res_"+(char)(i+'A')+j, rlsAmount[i],rlsAmount[i]);
+//                System.out.println(lengths[ind+j]);
+                resources[ind+j] = new IntVar(store, "res_"+(char)(i+'A')+j, 1,1); //every roll uses only one master roll
 			
 //               Setting constrains
 		endPos[ind+j]  = new IntVar(store, "end_"+(char)(i+'A')+j, 0, M_size);
@@ -119,7 +119,6 @@ public class CuttingStock {
     }
     
     
-    //copied from example not really working
     public void searchSpecific() {
 
         int ind = 0;
@@ -129,7 +128,7 @@ public class CuttingStock {
         
         Search label = new DepthFirstSearch ();
         label.getSolutionListener().searchAll(true);
-        label.getSolutionListener().recordSolutions(true);
+        label.getSolutionListener().recordSolutions(false);
 
         boolean result;
         
@@ -142,16 +141,21 @@ public class CuttingStock {
 //        }
 
         if(result) {
+            m_solFound = true;
             label.printAllSolutions();
 
-            System.out.println("Number of master rolls needed: " + cost.value());
+            System.out.println("Number of master rolls needed: " + cost);
             
             for(int i = ind = 0; i < rlsDistNum; i++) {
                 for( int j = 0; j < m_rlsAmount[i]; j++){
-                    System.out.println("Roll_" + (char)(i+'A')+j + ": " + startPos[i].value() + ".." + endPos[i].value());
+                    System.out.println("Roll_" + (char)(i+'A')+j + ": " + startPos[ind] + " " + endPos[ind]);
+                    ind++;
                 }
-                ind += m_rlsAmount[i];
+                
             }
         }
+    }
+    public void orderResults() {
+        
     }
 }
