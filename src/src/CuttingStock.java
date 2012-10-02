@@ -23,14 +23,14 @@ public class CuttingStock {
     public ArrayList<Var>   vars;
     public IntVar           cost;
         
-    IntVar[]    startPos; //Data with starting positions
-    IntVar []   endPos; //Data with ending positions of roll
-    int         rlsDistNum; //number of distinct types of rolls (different sizes)
-    int         rlsNumAll; // number of all rolls
+    public IntVar[]    startPos; //Data with starting positions
+    public IntVar []   endPos; //Data with ending positions of roll
+    public int         rlsDistNum; //number of distinct types of rolls (different sizes)
+    public int         rlsNumAll; // number of all rolls
     Store       store;
-    int []      m_rlsSizes; //sizes of distincts rolls
-    int []      m_rlsAmount; //amount of distinct rolls
-    boolean     m_solFound; //found solution?
+    public int []      m_rlsSizes; //sizes of distincts rolls
+    public int []      m_rlsAmount; //amount of distinct rolls
+    public boolean     m_solFound; //found solution?
     int [][]    m_orderedRolls;
     /**
      * Models a CLP problem
@@ -127,8 +127,8 @@ public class CuttingStock {
                                                      new IndomainMin ());
         
         Search label = new DepthFirstSearch ();
-        label.getSolutionListener().searchAll(true);
-        label.getSolutionListener().recordSolutions(false);
+        /*label.getSolutionListener().searchAll(true);
+        label.getSolutionListener().recordSolutions(false);*/
 
         boolean result;
         
@@ -140,21 +140,9 @@ public class CuttingStock {
 //            System.out.println("Variable " + i + " " + variables[i]);
 //        }
 
-        if(result) {
-            m_solFound = true;
-            label.printAllSolutions();
-
-            System.out.println("Number of master rolls needed: " + cost);
-            
-            for(int i = ind = 0; i < rlsDistNum; i++) {
-                for( int j = 0; j < m_rlsAmount[i]; j++){
-                    System.out.println("Roll_" + (char)(i+'A')+j + ": " + startPos[ind] + " " + endPos[ind]);
-                    ind++;
-                }
-                
-            }
+        
         }
-    }
+    
     public void orderResults() {
         
     }

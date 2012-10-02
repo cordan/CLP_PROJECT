@@ -6,9 +6,12 @@ package gui;
 
 import gui.CuttingStockInput;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import src.AntCP;
+import src.CuttingStock;
 
 /**
  *
@@ -16,6 +19,11 @@ import src.AntCP;
  */
 public class Window extends javax.swing.JFrame {
 
+    
+    public int noOfElements = 0;
+    public ArrayList<CuttingStockInput> CuttingStockInputList = new ArrayList<CuttingStockInput>();
+    
+    
     /**
      * Creates new form Window
      */
@@ -41,6 +49,8 @@ public class Window extends javax.swing.JFrame {
         jSlider1 = new javax.swing.JSlider();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        CutOutput = new javax.swing.JTextPane();
         jPanel3 = new javax.swing.JPanel();
         arc1 = new javax.swing.JTextField();
         arc2 = new javax.swing.JTextField();
@@ -124,6 +134,17 @@ public class Window extends javax.swing.JFrame {
         jPanel4.setLayout(new java.awt.GridLayout(1, 0, 1, 1));
         jScrollPane1.setViewportView(jPanel4);
 
+        jButton1.setText("Done");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        CutOutput.setEditable(false);
+        CutOutput.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        CutOutput.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -136,9 +157,14 @@ public class Window extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CutOutput)
+                            .addComponent(jScrollPane1))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -151,15 +177,29 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CutOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cutting stock", jPanel2);
 
         arc1.setName("");
+        arc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                arc1ActionPerformed(evt);
+            }
+        });
 
         arc2.setName("");
+        arc2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                arc2ActionPerformed(evt);
+            }
+        });
 
         arc3.setName("");
 
@@ -533,6 +573,7 @@ public class Window extends javax.swing.JFrame {
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         jPanel4.removeAll();
+        noOfElements = 0;
         int numberOfDistinctRolls = this.jSlider1.getValue();
         
         if (numberOfDistinctRolls > 0) {
@@ -544,18 +585,22 @@ public class Window extends javax.swing.JFrame {
                 CuttingStockInputs = new GridLayout(6,1);
             }
             jPanel4.setLayout(CuttingStockInputs);
-            CuttingStockInput arrayOfCuttingStockInputs[] = new CuttingStockInput[numberOfDistinctRolls];
-
+            
+            
+            
+            
             for (int i=0; i<numberOfDistinctRolls; i++) {
-                jPanel4.add(arrayOfCuttingStockInputs[i] = new CuttingStockInput(i+1));
+                CuttingStockInputList.add(i,new CuttingStockInput(i));
+                jPanel4.add(CuttingStockInputList.get(i));
+                noOfElements++;
             }
-            JButton done = new JButton("done");
-            jPanel4.add(done);
+           
         }
         jPanel1.repaint();
         
     }//GEN-LAST:event_jSlider1StateChanged
 
+    
     private void SubmitArcDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitArcDataActionPerformed
         
         
@@ -598,6 +643,54 @@ public class Window extends javax.swing.JFrame {
     private void startNodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNodeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_startNodeActionPerformed
+
+    private void arc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arc2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_arc2ActionPerformed
+
+    private void arc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arc1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_arc1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       CuttingStock cutme = new CuttingStock();
+        int[] length = new int[noOfElements];
+        int[] quantity = new int[noOfElements];
+        
+        
+        
+        for (int i=0; i<noOfElements; i++) {
+           length[i] = CuttingStockInputList.get(i).GetRollWidth();
+           quantity[i] = CuttingStockInputList.get(i).GetRollNo();
+        }
+        
+        
+        
+        
+        cutme.model(5600, length,quantity); //size of master roll: 10
+        
+        cutme.searchSpecific();
+        
+        //if(cutme.m_solFound) {
+            int ind;
+           // label.printAllSolutions();
+            
+            String content = "";
+            content+="Number of master rolls needed: "+ cutme.cost+"\n\n";
+            
+ 
+            
+            for(int i = ind = 0; i < cutme.rlsDistNum; i++) {
+                for( int j = 0; j < cutme.m_rlsAmount[i]; j++){
+                    content+="Roll " + (char)(i+'A')+j + ": " + cutme.startPos[ind] + " " + cutme.endPos[ind]+"\n";
+                    ind++;
+                    
+                }
+            CutOutput.setText(content);
+            //}
+        
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -644,6 +737,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JLabel AntGraph;
     private javax.swing.JTextPane ArcCostDisplay;
     private javax.swing.JTextPane ArcResultsDisplay;
+    private javax.swing.JTextPane CutOutput;
     private javax.swing.JButton SubmitArcData;
     private javax.swing.JTextField arc1;
     private javax.swing.JTextField arc10;
@@ -666,6 +760,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JTextField arc8;
     private javax.swing.JTextField arc9;
     private javax.swing.JComboBox finishNode;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
